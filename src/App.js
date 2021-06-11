@@ -1,41 +1,28 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
-import './App.css';
+const schema = yup.object().shape({
+    firstName: yup.string().required(),
+    age: yup.number().positive().integer().required(),
+});
 
-// The following component is an example of your existing Input Component
-const Input = ({ label, register, required }) => (
-    <>
-        <label>{label}</label>
-        <input {...register(label, { required })} />
-    </>
-);
-
-// you can use React.forwardRef to pass the ref too
-const Select = React.forwardRef(({ onChange, onBlur, name, label }, ref) => (
-    <>
-        <label>{label}</label>
-        <select name={name} ref={ref} onChange={onChange} onBlur={onBlur}>
-            <option value="20">20</option>
-            <option value="30">30</option>
-        </select>
-    </>
-));
-
-const App = () => {
-    const { register, handleSubmit } = useForm();
-
-    const onSubmit = (data) => {
-        alert(JSON.stringify(data));
-    };
+export default function App() {
+    const { register, handleSubmit, formState:{ errors } } = useForm({
+        resolver: yupResolver(schema)
+    });
+    const onSubmit = data => console.log(data);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <Input label="First Name" register={register} required  />
-            <Select label="Age" {...register("Age")} />
+            <input {...register("firstName")} />
+            <p>{errors.firstName?.message}</p>
+
+            <input {...register("age")} />
+            <p>{errors.age?.message}</p>
+
             <input type="submit" />
         </form>
     );
-};
-
-export default App;
+}

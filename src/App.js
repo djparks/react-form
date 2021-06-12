@@ -4,8 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
 const schema = yup.object().shape({
-    firstName: yup.string().required(),
-    age: yup.number().positive().integer().required(),
+    taxId: yup.string().required(),
+    partnerId: yup.number().positive().integer().required(),
 });
 
 export default function App() {
@@ -16,13 +16,20 @@ export default function App() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <input {...register("firstName")} />
-            <p>{errors.firstName?.message}</p>
+            <section>
+                <label htmlFor="taxId">Tax Id: </label>
+                <input id="taxId" {...register("taxId")} />
+                <p>{errors.taxId?.message}</p>
+            </section>
 
-            <input {...register("age")} />
-            <p>{errors.age?.message}</p>
-
-            <input type="submit" />
+            <section>
+                <label htmlFor="partnerId">Partner Id: </label>
+                <input id="partnerId" {...register("partnerId")} />
+                <p>{errors.partnerId?.message}</p>
+            </section>
+            <section>
+                <input type="submit" />
+            </section>
         </form>
     );
 }

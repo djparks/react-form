@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
 /*
-const schema = yup.object().shape({
+const schemaTax = yup.object().shape({
     taxId: yup.string().required(),
     partnerId: yup.number().positive().integer().required(),
 });
@@ -12,7 +12,7 @@ const schema = yup.object().shape({
 
 export default function App() {
     const { register, handleSubmit, formState:{ errors } } = useForm({
-        resolver: yupResolver(schema)
+        resolver: yupResolver(schemaTax)
     });
     const onSubmit = data => console.log(data);
 

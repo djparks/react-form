@@ -1,7 +1,21 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+
+import './App.css';
+import ContactForm from './ContactForm';
+
+function App() {
+    return (
+        <div className="App">
+            <ContactForm />
+        </div>
+    );
+}
+
+export default App;
+
+// import { useForm } from "react-hook-form";
+// import { yupResolver } from '@hookform/resolvers/yup';
+// import * as yup from "yup";
 
 /*
 const schemaTax = yup.object().shape({
@@ -37,6 +51,7 @@ export default function App() {
 }
 */
 
+/*
 const schema = yup.object().shape({
     firstName: yup.string().required(),
     lastName: yup.string().required(),
@@ -85,4 +100,5 @@ export default function App() {
         </form>
     );
 }
+*/
 
